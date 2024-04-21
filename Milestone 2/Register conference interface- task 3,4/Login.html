@@ -1,0 +1,202 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <title>Login Interface</title>-->
+<!--  <style>-->
+<!--    body {-->
+<!--      margin: 0;-->
+<!--      padding: 0;-->
+<!--      font-family: 'Arial', sans-serif;-->
+<!--      background: #4e54c8;-->
+<!--      background: linear-gradient(to right, #9355ff, #4e5ec8);-->
+<!--      height: 100vh;-->
+<!--      display: flex;-->
+<!--      align-items: center;-->
+<!--      justify-content: center;-->
+<!--    }-->
+
+<!--    .login-container {-->
+<!--      background: #ffffff;-->
+<!--      padding: 20px;-->
+<!--      border-radius: 8px;-->
+<!--      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--      width: 300px;-->
+<!--      text-align: center;-->
+<!--    }-->
+
+<!--    .login-container h2 {-->
+<!--      color: #333;-->
+<!--    }-->
+
+<!--    .login-form input {-->
+<!--      width: 100%;-->
+<!--      padding: 10px;-->
+<!--      margin: 10px 0;-->
+<!--      box-sizing: border-box;-->
+<!--      border: 1px solid #ccc;-->
+<!--      border-radius: 8px;-->
+<!--      outline: none;-->
+<!--    }-->
+
+<!--    .login-form button {-->
+<!--      width: 100%;-->
+<!--      padding: 10px;-->
+<!--      background: #4e54c8;-->
+<!--      color: #fff;-->
+<!--      border: none;-->
+<!--      border-radius: 4px;-->
+<!--      cursor: pointer;-->
+<!--      transition: background 0.3s ease;-->
+<!--    }-->
+
+<!--    .login-form button:hover {-->
+<!--      background: #8f94fb;-->
+<!--    }-->
+
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="login-container">-->
+<!--  <h2> Organizer login</h2>-->
+<!--  <form class="login-form">-->
+<!--    <input type="text" id="username" placeholder="Username" required>-->
+<!--    <input type="password" id="password" placeholder="Password" required>-->
+<!--    <button type="submit">Login</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--  // script.js-->
+
+<!--  document.addEventListener('DOMContentLoaded', function () {-->
+<!--    const loginForm = document.querySelector('.login-form');-->
+
+<!--    loginForm.addEventListener('submit', function (event) {-->
+<!--      event.preventDefault();-->
+
+<!--      const username = document.querySelector('#username').value;-->
+<!--      const password = document.querySelector('#password').value;-->
+
+<!--      console.log('Username:', username);-->
+<!--      console.log('Password:', password);-->
+<!--    });-->
+<!--  });-->
+<!--  // script.js-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Interface</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #4e54c8;
+      background: linear-gradient(to right, #9355ff, #4e5ec8);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      color: #333;
+    }
+
+
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      background: #4e54c8;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-form button:hover {
+      background: #8f94fb;
+    }
+
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <h2> Organizer login</h2>
+  <form class="login-form" onsubmit="validateLogin(event)">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<script>
+  async function validateLogin(event) {
+    event.preventDefault();
+
+    const username = document.querySelector('#username').value;
+    const password = document.querySelector('#password').value;
+
+    console.log('Username:', username);
+    console.log('Password:', password);
+    try {
+      // Fetch credentials from the JSON file
+      const response = await fetch('Logincredentials.json');
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch credentials');
+      }
+
+      const credentials = await response.json();
+
+      // Check if the entered credentials are valid
+      const isValid = credentials.some(cred => cred.username === username && cred.password === password);
+
+      if (isValid) {
+        // Redirect to the conference registration page
+        window.location.href = 'Registerconference.html';
+      } else {
+        alert('Invalid credentials. Please try again.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred. Please try again later.');
+    }
+  }
+</script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/9.1.1/mocha.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.js"></script>-->
+<!--<script src="testlogin.js"></script>-->
+
+</body>
+</html>

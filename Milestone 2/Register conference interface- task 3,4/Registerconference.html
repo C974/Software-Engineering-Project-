@@ -1,0 +1,525 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Conference Organizer Interface</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            font-family: 'Arial', sans-serif;-->
+<!--            background: #4e54c8;-->
+<!--            background: linear-gradient(to right, #84c5d3, #396ed0);-->
+<!--            height: 100vh;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--        }-->
+
+<!--        .organizer-container {-->
+<!--            background: #ffffff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--            width: 400px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .organizer-container h2 {-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        .conference-details input,-->
+<!--        .conference-details textarea {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin: 10px 0;-->
+<!--            box-sizing: border-box;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            outline: none;-->
+<!--        }-->
+
+<!--        .conference-details button {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            background: #4e54c8;-->
+<!--            color: #fff;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background 0.3s ease;-->
+<!--        }-->
+
+<!--        .conference-details button:hover {-->
+<!--            background: #8f94fb;-->
+<!--        }-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="organizer-container">-->
+<!--    <h2> Register conference</h2>-->
+<!--    <form class="conference-details">-->
+<!--        <input type="text" placeholder="Conference Name" required>-->
+<!--        <input type="date" placeholder="Dates" required>-->
+<!--        <textarea placeholder="List of Reviewers and Their Expertise" rows="4" required></textarea>-->
+<!--        <input type="text" placeholder="Venue" required>-->
+<!--        <button type="submit">Submit Details</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+<!--222222222222222-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Conference Organizer Interface</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            font-family: 'Arial', sans-serif;-->
+<!--            background: #4e54c8;-->
+<!--            background: linear-gradient(to right, #84c5d3, #396ed0);-->
+<!--            height: 100vh;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--        }-->
+
+<!--        .organizer-container {-->
+<!--            background: #ffffff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--            width: 400px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .organizer-container h2 {-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        .conference-details input,-->
+<!--        .conference-details textarea {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin: 10px 0;-->
+<!--            box-sizing: border-box;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            outline: none;-->
+<!--        }-->
+
+<!--        .conference-details button {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            background: #4e54c8;-->
+<!--            color: #fff;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background 0.3s ease;-->
+<!--        }-->
+
+<!--        .conference-details button:hover {-->
+<!--            background: #8f94fb;-->
+<!--        }-->
+
+<!--        .error-message {-->
+<!--            color: red;-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="organizer-container">-->
+<!--    <h2> Register conference</h2>-->
+<!--    <form class="conference-details" onsubmit="saveConferenceDetails(event)">-->
+<!--        <input type="text" id="conferenceName" placeholder="Conference Name" required>-->
+<!--        <input type="date" id="conferenceDates" placeholder="Dates" required>-->
+<!--        <textarea id="reviewersList" placeholder="List of Reviewers and Their Expertise" rows="4" required></textarea>-->
+<!--        <input type="text" id="conferenceVenue" placeholder="Venue" required>-->
+<!--        <button type="submit">Submit Details</button>-->
+<!--        <p class="error-message" id="errorMessage"></p>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function saveConferenceDetails(event) {-->
+<!--        event.preventDefault();-->
+
+<!--        const conferenceName = document.getElementById('conferenceName').value;-->
+<!--        const conferenceDates = document.getElementById('conferenceDates').value;-->
+<!--        const reviewersList = document.getElementById('reviewersList').value;-->
+<!--        const conferenceVenue = document.getElementById('conferenceVenue').value;-->
+
+<!--        // Check if any of the fields are empty-->
+<!--        if (!conferenceName || !conferenceDates || !reviewersList || !conferenceVenue) {-->
+<!--            document.getElementById('errorMessage').innerText = 'Please enter all details.';-->
+<!--            return;-->
+<!--        }-->
+
+<!--        const conferenceDetails = `-->
+<!--Conference Name: ${conferenceName}-->
+<!--Dates: ${conferenceDates}-->
+<!--Reviewers List: ${reviewersList}-->
+<!--Venue: ${conferenceVenue}-->
+<!--`;-->
+
+<!--        // Create a Blob containing the conference details-->
+<!--        const blob = new Blob([conferenceDetails], { type: 'text/plain' });-->
+
+<!--        // Create a download link and trigger a click to download the file-->
+<!--        const downloadLink = document.createElement('a');-->
+<!--        downloadLink.href = URL.createObjectURL(blob);-->
+<!--        downloadLink.download = 'conference_details.txt';-->
+<!--        downloadLink.click();-->
+
+<!--        document.getElementById('errorMessage').innerText = '';-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
+
+
+
+<!--3-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Conference Organizer Interface</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            font-family: 'Arial', sans-serif;-->
+<!--            background: #4e54c8;-->
+<!--            background: linear-gradient(to right, #84c5d3, #396ed0);-->
+<!--            height: 100vh;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--        }-->
+
+<!--        .organizer-container {-->
+<!--            background: #ffffff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--            width: 400px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .organizer-container h2 {-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        .conference-details input,-->
+<!--        .conference-details textarea {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin: 10px 0;-->
+<!--            box-sizing: border-box;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            outline: none;-->
+<!--        }-->
+
+<!--        .conference-details button {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            background: #4e54c8;-->
+<!--            color: #fff;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background 0.3s ease;-->
+<!--        }-->
+
+<!--        .conference-details button:hover {-->
+<!--            background: #8f94fb;-->
+<!--        }-->
+
+<!--        .error-message {-->
+<!--            color: red;-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="organizer-container">-->
+<!--    <h2> Register conference</h2>-->
+<!--    <form class="conference-details" onsubmit="saveConferenceDetails(event)">-->
+<!--        <input type="text" id="conferenceName" placeholder="Conference Name" required>-->
+<!--        <input type="date" id="conferenceDates" placeholder="Dates" required>-->
+<!--        <textarea id="reviewersList" placeholder="List of Reviewers and Their Expertise" rows="4" required></textarea>-->
+<!--        <input type="text" id="conferenceVenue" placeholder="Venue" required>-->
+<!--        <button type="submit">Submit Details</button>-->
+<!--        <p class="error-message" id="errorMessage"></p>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function saveConferenceDetails(event) {-->
+<!--        event.preventDefault();-->
+
+<!--        const conferenceName = document.getElementById('conferenceName').value;-->
+<!--        const conferenceDates = document.getElementById('conferenceDates').value;-->
+<!--        const reviewersList = document.getElementById('reviewersList').value;-->
+<!--        const conferenceVenue = document.getElementById('conferenceVenue').value;-->
+
+<!--        // Check if any of the fields are empty-->
+<!--        if (!conferenceName || !conferenceDates || !reviewersList || !conferenceVenue) {-->
+<!--            document.getElementById('errorMessage').innerText = 'Please enter all details.';-->
+<!--            return;-->
+<!--        }-->
+
+<!--        const conferenceDetails = {-->
+<!--            conferenceName,-->
+<!--            conferenceDates,-->
+<!--            reviewersList,-->
+<!--            conferenceVenue,-->
+<!--        };-->
+
+<!--        // Make an AJAX request to the server to save conference details-->
+<!--        fetch('http://localhost:3000/registerConference', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json',-->
+<!--            },-->
+<!--            body: JSON.stringify(conferenceDetails),-->
+<!--        })-->
+<!--            .then(response => response.text())-->
+<!--            .then(message => {-->
+<!--                document.getElementById('errorMessage').innerText = message;-->
+<!--            })-->
+<!--            .catch(error => {-->
+<!--                console.error('Error:', error);-->
+<!--                document.getElementById('errorMessage').innerText = 'An error occurred. Please try again later.';-->
+<!--            });-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Organizer Interface</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #4e54c8;
+            background: linear-gradient(to right, #84c5d3, #396ed0);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .organizer-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        .organizer-container h2 {
+            color: #333;
+        }
+
+        .conference-details input,
+        .conference-details textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .conference-details button {
+            width: 100%;
+            padding: 10px;
+            background: #4e54c8;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .conference-details button:hover {
+            background: #8f94fb;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="organizer-container">
+    <h2> Register conference</h2>
+    <form class="conference-details" onsubmit="saveConferenceDetails(event)">
+        <input type="text" id="conferenceName" placeholder="Conference Name" required>
+        <input type="date" id="conferenceDates" placeholder="Dates" required>
+        <textarea id="reviewersList" placeholder="List of Reviewers and Their Expertise" rows="4" required></textarea>
+        <input type="text" id="conferenceVenue" placeholder="Venue" required>
+        <button type="submit">Submit Details</button>
+        <p class="error-message" id="errorMessage"></p>
+    </form>
+</div>
+
+<script src="Conference.js"></script>
+<script>
+    // function saveConferenceDetails(event) {
+    //     event.preventDefault();
+    //
+    //     const conferenceName = document.getElementById('conferenceName').value;
+    //     const conferenceDates = document.getElementById('conferenceDates').value;
+    //     const reviewersList = document.getElementById('reviewersList').value;
+    //     const conferenceVenue = document.getElementById('conferenceVenue').value;
+    //
+    //     // Check if any of the fields are empty
+    //     if (!conferenceName || !conferenceDates || !reviewersList || !conferenceVenue) {
+    //         document.getElementById('errorMessage').innerText = 'Please enter all details.';
+    //         return;
+    //     }
+    //
+    //     // Create an object of the Conference class
+    //     const conference = new Conference(conferenceName, conferenceDates, reviewersList, conferenceVenue);
+    //
+    //     // Convert conference object to JSON format
+    //     const conferenceJSON = JSON.stringify(conference, null, 2);
+    //
+    //     // Create a Blob containing the JSON data
+    //
+    //     const blob = new Blob([conferenceJSON], {
+    //
+    //         type: 'application/json'
+    //
+    //     });
+    //
+    //     // Create a link element and trigger a click to download the file
+    //     const a = document.createElement('a');
+    //     a.href = URL.createObjectURL(blob);
+    //     a.download = 'conference_details.txt';
+    //     a.click();
+    // }
+
+    // Global array to store created conferences
+    const createdConferences = [];
+
+    function saveConferenceDetails(event) {
+        event.preventDefault();
+
+        const conferenceName = document.getElementById('conferenceName').value;
+        const conferenceDates = document.getElementById('conferenceDates').value;
+        const reviewersList = document.getElementById('reviewersList').value;
+        const conferenceVenue = document.getElementById('conferenceVenue').value;
+
+        // Check if any of the fields are empty
+        if (!conferenceName || !conferenceDates || !reviewersList || !conferenceVenue) {
+            document.getElementById('errorMessage').innerText = 'Please enter all details.';
+            return;
+        }
+
+        // Check if the conference with the same details already exists
+        if (checkIfExist(conferenceName)) {
+            document.getElementById('errorMessage').innerText = 'Conference with the same details already exists.';
+            return;
+        }
+
+        // Create an object of the Conference class
+        const conference = {
+            name: conferenceName,
+            dates: conferenceDates,
+            reviewers: reviewersList,
+            venue: conferenceVenue
+        };
+
+        // Add the current conference to the array
+        createdConferences.push(conference);
+
+
+        downloadAllConferences();
+
+        // Reset form and error message
+        document.getElementById('errorMessage').innerText = '';
+        document.querySelector('.conference-details').reset();
+    }
+
+    // Method to check if the conference with the same details already exists
+    function checkIfExist(name) {
+        return createdConferences.some(conf =>
+            conf.name === name
+
+        );
+    }
+    function downloadAllConferences() {
+        const conferencesText = createdConferences.map(conf => {
+            return `Conference Name: ${conf.name}\nDates: ${conf.dates}\nReviewers: ${conf.reviewers}\nVenue: ${conf.venue}\n\n`;
+        }).join('\n');
+
+        // Create a Blob containing the text data
+        const blob = new Blob([conferencesText], {
+            type: 'text/plain'
+        });
+
+        // Create a link element
+        const a = document.createElement('a');
+
+        // Set the download attribute with the desired file name and extension
+        a.download = 'all_conferences.txt';
+
+        // Create a URL for the Blob and set it as the href attribute
+        a.href = URL.createObjectURL(blob);
+
+        // Append the link to the document body
+        document.body.appendChild(a);
+
+        // Trigger a click event to download the file
+        a.click();
+
+        // Remove the link from the document body
+        document.body.removeChild(a);
+    }
+
+</script>
+</body>
+</html>
+
+
